@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Validation</title>
+</head>
+<body>
+
+    <!--
+    Cuando se envía el formulario, los datos del formulario se envían con method="post".
+
+    ¿Qué es la variable $_SERVER["PHP_SELF"]?
+    $_SERVER["PHP_SELF"] es una variable súper global que devuelve el nombre de archivo del script que se está ejecutando actualmente.
+    Por lo tanto, el $_SERVER ["PHP_SELF"] envía los datos del formulario enviado a la página en sí, en lugar de saltar a una página diferente. De esta manera, el usuario recibirá mensajes de error en la misma página que el formulario.
+
+
+    ¿Qué es la función htmlspecialchars()?
+    La función htmlspecialchars() convierte caracteres especiales en entidades HTML.
+    Esto significa que reemplazará los caracteres HTML como < y > con < y >. Esto evita que los atacantes exploten el código inyectando código HTML o Javascript (ataques de secuencias de comandos entre sitios) en formularios.
+
+
+    ¡La variable $_SERVER["PHP_SELF"] puede ser utilizada por hackers!
+    Si se utiliza PHP_SELF en su página, un usuario puede ingresar una barra diagonal (/) y luego algunos comandos de Cross Site Scripting (XSS)
+
+    Las secuencias de comandos entre sitios (XSS) son un tipo de vulnerabilidad de seguridad informática que normalmente se encuentra en las aplicaciones web. XSS permite a los atacantes inyectar scripts del lado cliente en páginas web vistas por otros usuarios.
+
+    Supongamos que teenmos un formulario (18_Form-Validation.php)
+    Ahora, si un usuario ingresa la URL normal en la barra de direcciones como "http://www.example.com/18_Form-Validation.php", el código anterior se traducirá a:
+    <form method="post" action="18_Form-Validation.php">
+
+    Ahora supongamos que un usuario introduce la siguiente dirección URL en la barra de direcciones:
+    http://www.example.com/18_Form-Validation.php/%22%3E%3Cscript%3Ealert('hacked')%3C/script%3E
+
+    En tal caso, el código se traducirá a:
+    <form method="post" action="18_Form-Validation.php/"><script>alert('hacked')</script>
+
+    Este código agrega una etiqueta de script y un comando de alerta. Y cuando se cargue la página, se ejecutará el código JavaScript (el usuario verá un cuadro de alerta).
+    Este es solo un ejemplo simple e inofensivo de cómo se puede explotar la variable PHP_SELF.
+
+    Tenga en cuenta que cualquier código JavaScript se puede agregar dentro del <script>etiqueta!
+    Un hacker puede redirigir al usuario a un archivo en otro servidor, y ese archivo puede contener código malicioso que puede alterar las variables globales o enviar el formulario a otra dirección para guardar los datos del usuario, por ejemplo.
+
+
+    ¿Cómo evitar los exploits de $_SERVER["PHP_SELF"]?
+    Los exploits $_SERVER["PHP_SELF"] se pueden evitar mediante la función htmlspecialchars().
+    El código del formulario debe tener este aspecto:
+    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+    La función htmlspecialchars() convierte caracteres especiales en entidades HTML. Ahora, si el usuario intenta explotar la variable PHP_SELF, dará como resultado el siguiente resultado:
+
+    <form method="post" action="test_form.php/&quot;&gt;&lt;script&gt;alert('hacked')&lt;/script&gt;">
+    ¡El intento de explotación falla y no se hace daño!
+
+
+    También haremos dos cosas más cuando el usuario envíe el formulario:
+        - Elimine los caracteres innecesarios (espacio adicional, tabulación, nueva línea) de los datos de entrada del usuario (con la función PHP trim())
+        - Eliminar barras diagonales inversas (\) de los datos de entrada del usuario (con la función php stripslashes())
+
+    El siguiente paso es crear una función que hará toda la comprobación por nosotros (que es mucho más conveniente que escribir el mismo código una y otra vez).
+    Debes ir entonces a "myForm.php" que ademas muestra código PHP dentro de un archivo HTML
+
+    -->
+
+</body>
+</html>

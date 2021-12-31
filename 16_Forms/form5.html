@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Validar Campos</title>
+</head>
+<body>
+
+    <!--
+    Validar Nombre
+    El siguiente código muestra una forma sencilla de comprobar si el campo de nombre solo contiene letras, guiones, apóstrofos y espacios en blanco. Si el valor del campo de nombre no es válido, almacene un mensaje de error:
+    $name = test_input($_POST["name"]);
+    if (!preg_match("/^[a-zA-Z-' ]*$/",$name)) {
+      $nameErr = "Only letters and white space allowed";
+    }
+
+    La función preg_match() busca un patrón en una cadena, devolviendo true si el patrón existe y false en caso contrario.
+    -->
+
+    <!--
+    Validar correo electrónico
+    La forma más fácil y segura de verificar si una dirección de correo electrónico está bien formada es usar la función filter_var() de PHP.
+    En el código siguiente, si la dirección de correo electrónico no está bien formada, almacene un mensaje de error:
+    $email = test_input($_POST["email"]);
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+      $emailErr = "Invalid email format";
+    }
+    -->
+
+    <!--
+    Validar URL
+    El código siguiente muestra una forma de comprobar si una sintaxis de dirección URL es válida (esta expresión regular también permite guiones en la URL). Si la sintaxis de la dirección URL no es válida, almacene un mensaje de error:
+    $website = test_input($_POST["website"]);
+    if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i",$website)) {
+      $websiteErr = "Invalid URL";
+    }
+    -->
+
+    <!--
+    El unico problema es que los valores no se mantienen en el form, si uno falla, todos se vacian, esto lo resolveremos en el siguiente form
+    -->
+
+
+</body>
+</html>

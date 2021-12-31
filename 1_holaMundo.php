@@ -98,6 +98,7 @@ Se puede comentar, dentro del código PHP así: //, /* (*)/, o así: #. Ojo, le 
 
 */
 eChO "Mi primer script en PHP!";
+echo "Esto es PHP!";
 
 ?>
 

@@ -91,6 +91,21 @@ foreach($age as $x => $val) {
 }
 print ("</br>");
 
+//Break & Continue
+//Al igual que los ifs, pueden ser usado en los bucles
+for ($x = 0; $x < 10; $x++) {
+    if ($x == 4) {
+        break;
+    }
+    echo "El número es: $x <br>";
+}
 
+//Continue: continua el flujo desde donde se especifique
+for ($x = 0; $x < 10; $x++) {
+    if ($x == 4) {
+        continue;
+    }
+    echo "El número es: $x <br>";
+}
 
 ?>

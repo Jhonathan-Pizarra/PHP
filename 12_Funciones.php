@@ -86,7 +86,17 @@ echo "7 + 13 = " . sum(7, 13) . "<br>";
 echo "2 + 4 = " . sum(2, 4);
 print ("</br>");
 
+//Argumentos por referencia
+//Los argumentos generalmente se pasan por valor,
+// lo que significa que se usa una copia del valor en la función y la variable que se pasó a la función no se puede cambiar.
+//Cuando un argumento de función se pasa por referencia, los cambios en el argumento también cambian la variable que se pasó.
+function add_five(&$value) {
+    $value += 5;
+}
 
+$num = 2;
+add_five($num);
+echo $num;
 
 
 ?>
